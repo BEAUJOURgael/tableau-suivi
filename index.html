@@ -1,42 +1,65 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Tableau de Suivi</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Tableau de Suivi</title>
+<link rel="stylesheet" href="style.css">
 
-    <!-- Librairie graphique -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Graphiques -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Export Excel -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </head>
+
 <body>
 
 <h1>📊 Tableau de Suivi</h1>
 
-<button onclick="toggleDarkMode()">🌙 Mode sombre</button>
-<button onclick="toutEffacer()">🗑️ Tout effacer</button>
+<div class="topbar">
+    <button onclick="toggleDarkMode()">🌙 Mode sombre</button>
+    <button onclick="toutEffacer()">🗑️ Tout effacer</button>
+    <button onclick="exportExcel()">💾 Export Excel</button>
+    <button onclick="window.print()">🖨️ Imprimer</button>
+</div>
 
 <div class="form">
     <input type="text" id="nom" placeholder="Nom">
     <input type="number" id="valeur" placeholder="Valeur €">
+    
+    <select id="categorie">
+        <option value="Moteur">Moteur</option>
+        <option value="Carrosserie">Carrosserie</option>
+        <option value="Freinage">Freinage</option>
+        <option value="Autre">Autre</option>
+    </select>
+
     <input type="date" id="date">
     <button onclick="ajouter()">Ajouter</button>
 </div>
 
+<div class="filters">
+    🔍 <input type="text" id="recherche" placeholder="Rechercher..." oninput="afficher()">
+    
+    📅 <input type="month" id="filtreMois" onchange="afficher()">
+</div>
+
 <table>
-    <thead>
-        <tr>
-            <th onclick="trierParDate()">📅 Date ⬍</th>
-            <th>Nom</th>
-            <th>Valeur</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody id="tableau"></tbody>
+<thead>
+<tr>
+<th>Date</th>
+<th>Nom</th>
+<th>Catégorie</th>
+<th>Valeur</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="tableau"></tbody>
 </table>
 
-<h2>Total : <span id="total">0</span> €</h2>
+<h2 id="stats"></h2>
 
-<canvas id="graphique" width="400" height="150"></canvas>
+<canvas id="graphique"></canvas>
 
 <script src="script.js"></script>
 </body>

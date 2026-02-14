@@ -1,105 +1,67 @@
-let donnees = JSON.parse(localStorage.getItem("suivi")) || [];
-let graphique;
+let data = JSON.parse(localStorage.getItem("trk")) || {
+    todo:[],
+    progress:[],
+    done:[]
+};
 
-function sauvegarder(){
-    localStorage.setItem("suivi", JSON.stringify(donnees));
+function save(){
+    localStorage.setItem("trk", JSON.stringify(data));
 }
 
-function toggleDarkMode(){
-    document.body.classList.toggle("dark");
-}
-
-function ajouter(){
+function ajouterCarte(){
     const nom = document.getElementById("nom").value;
-    const valeur = document.getElementById("valeur").value;
-    const categorie = document.getElementById("categorie").value;
-    const date = document.getElementById("date").value;
+    if(!nom) return;
 
-    if(!nom || !valeur || !date) return alert("Champs manquants");
-
-    donnees.push({nom, valeur:Number(valeur), categorie, date});
-    sauvegarder();
-    afficher();
+    data.todo.push({nom});
+    document.getElementById("nom").value="";
+    save();
+    render();
 }
 
-function supprimer(i){
-    donnees.splice(i,1);
-    sauvegarder();
-    afficher();
-}
+function render(){
+    ["todo","progress","done"].forEach(zone=>{
+        const el=document.getElementById(zone);
+        el.innerHTML="";
 
-function toutEffacer(){
-    if(confirm("Tout supprimer ?")){
-        donnees=[];
-        sauvegarder();
-        afficher();
-    }
-}
+        data[zone].forEach((card,i)=>{
+            const div=document.createElement("div");
+            div.className="card";
+            div.draggable=true;
+            div.innerText=card.nom;
 
-function filtrer(){
-    const recherche = document.getElementById("recherche").value.toLowerCase();
-    const mois = document.getElementById("filtreMois").value;
+            div.ondragstart=e=>{
+                e.dataTransfer.setData("text", JSON.stringify({zone,i}));
+            };
 
-    return donnees.filter(d=>{
-        const matchTexte = d.nom.toLowerCase().includes(recherche);
-        const matchMois = !mois || d.date.startsWith(mois);
-        return matchTexte && matchMois;
-    });
-}
+            el.appendChild(div);
+        });
 
-function afficher(){
-    const data = filtrer();
-    const tbody = document.getElementById("tableau");
-    tbody.innerHTML="";
+        el.ondragover=e=>e.preventDefault();
 
-    let total=0;
-
-    data.forEach((d,i)=>{
-        total+=d.valeur;
-
-        tbody.innerHTML+=`
-        <tr>
-            <td>${d.date}</td>
-            <td>${d.nom}</td>
-            <td><span class="categorie ${d.categorie}">${d.categorie}</span></td>
-            <td>${d.valeur} €</td>
-            <td><button onclick="supprimer(${i})">X</button></td>
-        </tr>`;
+        el.ondrop=e=>{
+            const d=JSON.parse(e.dataTransfer.getData("text"));
+            const moved=data[d.zone].splice(d.i,1)[0];
+            data[zone].push(moved);
+            save();
+            render();
+        };
     });
 
-    document.getElementById("stats").innerText =
-        `Total : ${total} € | ${data.length} opérations`;
-
-    dessinerGraphique(data);
+    updateGraph();
 }
 
-function dessinerGraphique(data){
+function updateGraph(){
     const ctx=document.getElementById("graphique");
 
-    const labels=data.map(d=>d.date);
-    const valeurs=data.map(d=>d.valeur);
-
-    if(graphique) graphique.destroy();
-
-    graphique=new Chart(ctx,{
-        type:'line',
+    new Chart(ctx,{
+        type:"doughnut",
         data:{
-            labels:labels,
+            labels:["À faire","En cours","Terminé"],
             datasets:[{
-                label:'Évolution des dépenses',
-                data:valeurs,
-                tension:0.3,
-                fill:false
+                data:[data.todo.length,data.progress.length,data.done.length]
             }]
         }
     });
 }
 
-function exportExcel(){
-    const ws = XLSX.utils.json_to_sheet(donnees);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Suivi");
-    XLSX.writeFile(wb, "suivi.xlsx");
-}
-
-afficher();
+render();

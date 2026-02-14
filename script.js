@@ -1,99 +1,105 @@
 let donnees = JSON.parse(localStorage.getItem("suivi")) || [];
 let graphique;
 
-// 💾 Sauvegarde
-function sauvegarder() {
+function sauvegarder(){
     localStorage.setItem("suivi", JSON.stringify(donnees));
 }
 
-// 🌙 Mode sombre
-function toggleDarkMode() {
+function toggleDarkMode(){
     document.body.classList.toggle("dark");
 }
 
-// ➕ Ajouter une ligne
-function ajouter() {
+function ajouter(){
     const nom = document.getElementById("nom").value;
     const valeur = document.getElementById("valeur").value;
+    const categorie = document.getElementById("categorie").value;
     const date = document.getElementById("date").value;
 
-    if (!nom || !valeur || !date) {
-        alert("Remplis tous les champs !");
-        return;
-    }
+    if(!nom || !valeur || !date) return alert("Champs manquants");
 
-    donnees.push({ nom, valeur: Number(valeur), date });
-
+    donnees.push({nom, valeur:Number(valeur), categorie, date});
     sauvegarder();
     afficher();
 }
 
-// ❌ Supprimer
-function supprimer(index) {
-    donnees.splice(index, 1);
+function supprimer(i){
+    donnees.splice(i,1);
     sauvegarder();
     afficher();
 }
 
-// 🗑️ Tout effacer
-function toutEffacer() {
-    if (confirm("Tout supprimer ?")) {
-        donnees = [];
+function toutEffacer(){
+    if(confirm("Tout supprimer ?")){
+        donnees=[];
         sauvegarder();
         afficher();
     }
 }
 
-// 📅 Trier par date
-function trierParDate() {
-    donnees.sort((a, b) => new Date(a.date) - new Date(b.date));
-    afficher();
+function filtrer(){
+    const recherche = document.getElementById("recherche").value.toLowerCase();
+    const mois = document.getElementById("filtreMois").value;
+
+    return donnees.filter(d=>{
+        const matchTexte = d.nom.toLowerCase().includes(recherche);
+        const matchMois = !mois || d.date.startsWith(mois);
+        return matchTexte && matchMois;
+    });
 }
 
-// 📊 Affichage + Graphique
-function afficher() {
-    const tableau = document.getElementById("tableau");
-    tableau.innerHTML = "";
+function afficher(){
+    const data = filtrer();
+    const tbody = document.getElementById("tableau");
+    tbody.innerHTML="";
 
-    let total = 0;
+    let total=0;
 
-    donnees.forEach((item, index) => {
-        total += item.valeur;
+    data.forEach((d,i)=>{
+        total+=d.valeur;
 
-        tableau.innerHTML += `
-            <tr>
-                <td>${item.date}</td>
-                <td>${item.nom}</td>
-                <td>${item.valeur} €</td>
-                <td><button class="supprimer" onclick="supprimer(${index})">X</button></td>
-            </tr>
-        `;
+        tbody.innerHTML+=`
+        <tr>
+            <td>${d.date}</td>
+            <td>${d.nom}</td>
+            <td><span class="categorie ${d.categorie}">${d.categorie}</span></td>
+            <td>${d.valeur} €</td>
+            <td><button onclick="supprimer(${i})">X</button></td>
+        </tr>`;
     });
 
-    document.getElementById("total").innerText = total;
+    document.getElementById("stats").innerText =
+        `Total : ${total} € | ${data.length} opérations`;
 
-    dessinerGraphique();
+    dessinerGraphique(data);
 }
 
-// 📈 Graphique automatique
-function dessinerGraphique() {
-    const ctx = document.getElementById("graphique");
+function dessinerGraphique(data){
+    const ctx=document.getElementById("graphique");
 
-    const labels = donnees.map(d => d.nom);
-    const valeurs = donnees.map(d => d.valeur);
+    const labels=data.map(d=>d.date);
+    const valeurs=data.map(d=>d.valeur);
 
-    if (graphique) graphique.destroy();
+    if(graphique) graphique.destroy();
 
-    graphique = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Dépenses',
-                data: valeurs
+    graphique=new Chart(ctx,{
+        type:'line',
+        data:{
+            labels:labels,
+            datasets:[{
+                label:'Évolution des dépenses',
+                data:valeurs,
+                tension:0.3,
+                fill:false
             }]
         }
     });
+}
+
+function exportExcel(){
+    const ws = XLSX.utils.json_to_sheet(donnees);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Suivi");
+    XLSX.writeFile(wb, "suivi.xlsx");
 }
 
 afficher();

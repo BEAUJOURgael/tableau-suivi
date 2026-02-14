@@ -1,127 +1,110 @@
-/* ===== TRK DESIGN STYLE ===== */
+/* ===== FUTURISTIC BAND STYLE ===== */
 
 body {
     margin:0;
     font-family: 'Segoe UI', sans-serif;
-    background:#0b0f14;
-    color:#e5e7eb;
+    background: radial-gradient(circle at 20% 20%, #0f172a, #020617);
+    color:white;
+    overflow:hidden;
 }
 
-/* HEADER */
+/* APP LAYOUT */
 
-header {
-    background:#111827;
-    padding:25px;
-    text-align:center;
-    border-bottom:1px solid #1f2933;
+.app {
+    display:flex;
+    height:100vh;
 }
 
-header h1 {
-    margin:0;
-    letter-spacing:4px;
-    font-weight:700;
-    color:#38bdf8;
-}
+/* SIDEBAR */
 
-header p {
-    margin:5px 0 0;
-    color:#6b7280;
-}
-
-/* CONTROLS */
-
-.controls {
-    text-align:center;
+.sidebar {
+    width:220px;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    border-right:1px solid rgba(255,255,255,0.08);
     padding:20px;
 }
 
-button {
-    background:#1f2937;
-    color:#e5e7eb;
-    border:1px solid #374151;
-    padding:10px 18px;
-    margin:5px;
+.sidebar h2 {
+    color:#38bdf8;
+    letter-spacing:3px;
+}
+
+.sidebar button {
+    width:100%;
+    margin-top:10px;
+    padding:10px;
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.1);
+    color:white;
     cursor:pointer;
+    transition:.3s;
+}
+
+.sidebar button:hover {
+    background:#38bdf8;
+    color:black;
+}
+
+/* CONTENT */
+
+.content {
+    flex:1;
+    padding:30px;
+    overflow:auto;
+}
+
+/* BOARDS */
+
+.boards {
+    display:flex;
+    gap:20px;
+}
+
+.board {
+    flex:1;
+    background: rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:15px;
+    min-height:300px;
+}
+
+/* CARDS */
+
+.card {
+    background:linear-gradient(135deg,#38bdf8,#6366f1);
+    margin:10px 0;
+    padding:12px;
+    cursor:grab;
     transition:.2s;
 }
 
-button:hover {
-    background:#38bdf8;
-    color:#000;
+.card:hover {
+    transform:scale(1.03);
 }
 
-button.danger:hover {
-    background:#ef4444;
+/* DROPZONE */
+
+.dropzone {
+    min-height:200px;
 }
 
-/* CARD SYSTEM */
+/* ADD */
 
-.card {
-    background:#111827;
-    margin:20px auto;
-    padding:20px;
-    width:85%;
-    border:1px solid #1f2937;
+.add {
+    margin-top:20px;
 }
 
-/* FORM */
-
-.form {
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-input, select {
+input {
+    padding:10px;
     background:#020617;
     border:1px solid #1f2937;
     color:white;
-    padding:10px;
-    margin:6px;
 }
 
-/* TABLE */
+/* GRAPH */
 
-table {
-    width:100%;
-    border-collapse:collapse;
-}
-
-th {
-    text-align:left;
-    padding:12px;
-    background:#020617;
-    color:#38bdf8;
-    border-bottom:1px solid #1f2937;
-}
-
-td {
-    padding:12px;
-    border-bottom:1px solid #1f2937;
-}
-
-/* CATEGORY COLORS */
-
-.categorie {
-    padding:4px 10px;
-    font-size:12px;
-}
-
-.Moteur { color:#f87171; }
-.Carrosserie { color:#fbbf24; }
-.Freinage { color:#34d399; }
-.Autre { color:#a78bfa; }
-
-/* STATS */
-
-.stats {
-    text-align:center;
-    font-size:22px;
-    color:#38bdf8;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-    .card { width:95%; }
+canvas {
+    margin-top:40px;
+    background:rgba(255,255,255,0.02);
 }

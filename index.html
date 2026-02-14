@@ -2,71 +2,62 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>TRK DESIGN • Suivi</title>
-
+<title>TRK • FUTURE DASH</title>
 <link rel="stylesheet" href="style.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="script.js" defer></script>
 </head>
 
 <body>
 
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <h2>TRK</h2>
+    <nav>
+        <button onclick="changerVue('board')">Dashboard</button>
+        <button onclick="changerVue('stats')">Stats</button>
+        <button onclick="toggleDarkMode()">Theme</button>
+    </nav>
+</aside>
+
+<!-- MAIN -->
+<main class="content">
+
 <header>
-    <h1>TRK DESIGN</h1>
-    <p>Dashboard de Suivi</p>
+    <h1>Future Tracking System</h1>
 </header>
 
-<section class="controls">
-    <button onclick="toggleDarkMode()">Mode sombre</button>
-    <button onclick="exportExcel()">Export Excel</button>
-    <button onclick="window.print()">Imprimer</button>
-    <button class="danger" onclick="toutEffacer()">Tout effacer</button>
+<section class="boards">
+
+<div class="board">
+<h3>À faire</h3>
+<div class="dropzone" id="todo"></div>
+</div>
+
+<div class="board">
+<h3>En cours</h3>
+<div class="dropzone" id="progress"></div>
+</div>
+
+<div class="board">
+<h3>Terminé</h3>
+<div class="dropzone" id="done"></div>
+</div>
+
 </section>
 
-<section class="card form">
-    <input type="text" id="nom" placeholder="Nom">
-    <input type="number" id="valeur" placeholder="Valeur €">
-
-    <select id="categorie">
-        <option value="Moteur">Moteur</option>
-        <option value="Carrosserie">Carrosserie</option>
-        <option value="Freinage">Freinage</option>
-        <option value="Autre">Autre</option>
-    </select>
-
-    <input type="date" id="date">
-    <button onclick="ajouter()">Ajouter</button>
+<section class="add">
+<input id="nom" placeholder="Nouvelle tâche">
+<button onclick="ajouterCarte()">Ajouter</button>
 </section>
 
-<section class="filters">
-    <input type="text" id="recherche" placeholder="Rechercher..." oninput="afficher()">
-    <input type="month" id="filtreMois" onchange="afficher()">
-</section>
-
-<section class="card">
-<table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Nom</th>
-<th>Catégorie</th>
-<th>Valeur</th>
-<th></th>
-</tr>
-</thead>
-<tbody id="tableau"></tbody>
-</table>
-</section>
-
-<section class="stats">
-<h2 id="stats"></h2>
-</section>
-
-<section class="card">
 <canvas id="graphique"></canvas>
-</section>
 
-<script src="script.js"></script>
+</main>
+</div>
+
 </body>
 </html>

@@ -1,11 +1,18 @@
 body {
     font-family: Arial;
     background: #f4f6f9;
+    color: #222;
     text-align: center;
+    transition: 0.3s;
+}
+
+.dark {
+    background: #121212;
+    color: #eee;
 }
 
 h1 {
-    color: #2c3e50;
+    margin-top: 20px;
 }
 
 .form {
@@ -15,15 +22,15 @@ h1 {
 input {
     padding: 10px;
     margin: 5px;
-    width: 200px;
 }
 
 button {
     padding: 10px 15px;
-    background: #3498db;
-    color: white;
+    margin: 5px;
     border: none;
     cursor: pointer;
+    background: #3498db;
+    color: white;
 }
 
 button:hover {
@@ -33,13 +40,17 @@ button:hover {
 table {
     margin: auto;
     border-collapse: collapse;
-    width: 60%;
+    width: 70%;
     background: white;
 }
 
+.dark table {
+    background: #1e1e1e;
+}
+
 th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 th {
@@ -49,8 +60,4 @@ th {
 
 .supprimer {
     background: red;
-    padding: 5px 10px;
-    color: white;
-    border: none;
-    cursor: pointer;
 }

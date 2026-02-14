@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <title>Tableau de Suivi</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Librairie graphique -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
 <h1>📊 Tableau de Suivi</h1>
 
+<button onclick="toggleDarkMode()">🌙 Mode sombre</button>
+<button onclick="toutEffacer()">🗑️ Tout effacer</button>
+
 <div class="form">
-    <input type="text" id="nom" placeholder="Nom de la tâche">
-    <input type="number" id="valeur" placeholder="Valeur (€)">
+    <input type="text" id="nom" placeholder="Nom">
+    <input type="number" id="valeur" placeholder="Valeur €">
+    <input type="date" id="date">
     <button onclick="ajouter()">Ajouter</button>
 </div>
 
 <table>
     <thead>
         <tr>
-            <th>Tâche</th>
+            <th onclick="trierParDate()">📅 Date ⬍</th>
+            <th>Nom</th>
             <th>Valeur</th>
             <th>Action</th>
         </tr>
@@ -27,6 +35,8 @@
 </table>
 
 <h2>Total : <span id="total">0</span> €</h2>
+
+<canvas id="graphique" width="400" height="150"></canvas>
 
 <script src="script.js"></script>
 </body>

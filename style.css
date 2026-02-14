@@ -1,143 +1,127 @@
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #eef1f5;
-    margin: 0;
-    padding: 0;
-    transition: 0.3s;
-}
+/* ===== TRK DESIGN STYLE ===== */
 
-/* MODE SOMBRE */
-body.dark {
-    background: #0f172a;
-    color: #e2e8f0;
+body {
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#0b0f14;
+    color:#e5e7eb;
 }
 
 /* HEADER */
-h1 {
-    background: linear-gradient(135deg,#3b82f6,#06b6d4);
-    color: white;
-    padding: 20px;
-    margin: 0;
-    text-align: center;
-    letter-spacing: 1px;
+
+header {
+    background:#111827;
+    padding:25px;
+    text-align:center;
+    border-bottom:1px solid #1f2933;
 }
 
-/* BOUTONS */
+header h1 {
+    margin:0;
+    letter-spacing:4px;
+    font-weight:700;
+    color:#38bdf8;
+}
+
+header p {
+    margin:5px 0 0;
+    color:#6b7280;
+}
+
+/* CONTROLS */
+
+.controls {
+    text-align:center;
+    padding:20px;
+}
+
 button {
-    background: #3b82f6;
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    margin: 5px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
+    background:#1f2937;
+    color:#e5e7eb;
+    border:1px solid #374151;
+    padding:10px 18px;
+    margin:5px;
+    cursor:pointer;
+    transition:.2s;
 }
 
 button:hover {
-    transform: translateY(-2px);
-    background: #2563eb;
+    background:#38bdf8;
+    color:#000;
 }
 
-/* FORMULAIRE */
+button.danger:hover {
+    background:#ef4444;
+}
+
+/* CARD SYSTEM */
+
+.card {
+    background:#111827;
+    margin:20px auto;
+    padding:20px;
+    width:85%;
+    border:1px solid #1f2937;
+}
+
+/* FORM */
+
 .form {
-    background: white;
-    padding: 20px;
-    margin: 20px auto;
-    width: 80%;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
 }
 
-.dark .form {
-    background: #1e293b;
-}
-
-/* INPUTS */
-input {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+input, select {
+    background:#020617;
+    border:1px solid #1f2937;
+    color:white;
+    padding:10px;
+    margin:6px;
 }
 
 /* TABLE */
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
 
-.dark table {
-    background: #1e293b;
+table {
+    width:100%;
+    border-collapse:collapse;
 }
 
 th {
-    background: #3b82f6;
-    color: white;
-    padding: 12px;
-    text-transform: uppercase;
+    text-align:left;
+    padding:12px;
+    background:#020617;
+    color:#38bdf8;
+    border-bottom:1px solid #1f2937;
 }
 
 td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
+    padding:12px;
+    border-bottom:1px solid #1f2937;
 }
 
-/* TOTAL */
-h2 {
-    text-align: center;
-    font-size: 28px;
-}
-
-/* GRAPHIQUE */
-canvas {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80% !important;
-    margin: 30px auto;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-.dark canvas {
-    background: #1e293b;
-}
-.topbar, .filters {
-    text-align:center;
-    margin:15px;
-}
-
-select {
-    padding:10px;
-}
+/* CATEGORY COLORS */
 
 .categorie {
-    padding:5px 10px;
-    border-radius:6px;
-    color:white;
+    padding:4px 10px;
     font-size:12px;
 }
 
-.Moteur { background:#ef4444; }
-.Carrosserie { background:#f59e0b; }
-.Freinage { background:#10b981; }
-.Autre { background:#6366f1; }
+.Moteur { color:#f87171; }
+.Carrosserie { color:#fbbf24; }
+.Freinage { color:#34d399; }
+.Autre { color:#a78bfa; }
 
-/* Responsive mobile */
-@media (max-width:700px){
-    table, .form {
-        width:95%;
-        font-size:14px;
-    }
-    input, select {
-        width:90%;
-        margin-top:8px;
-    }
+/* STATS */
+
+.stats {
+    text-align:center;
+    font-size:22px;
+    color:#38bdf8;
 }
 
+/* MOBILE */
+
+@media(max-width:700px){
+    .card { width:95%; }
+}

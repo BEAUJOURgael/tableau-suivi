@@ -1,63 +1,110 @@
 body {
-    font-family: Arial;
-    background: #f4f6f9;
-    color: #222;
-    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: #eef1f5;
+    margin: 0;
+    padding: 0;
     transition: 0.3s;
 }
 
-.dark {
-    background: #121212;
-    color: #eee;
+/* MODE SOMBRE */
+body.dark {
+    background: #0f172a;
+    color: #e2e8f0;
 }
 
+/* HEADER */
 h1 {
-    margin-top: 20px;
-}
-
-.form {
-    margin: 20px;
-}
-
-input {
-    padding: 10px;
-    margin: 5px;
-}
-
-button {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    cursor: pointer;
-    background: #3498db;
+    background: linear-gradient(135deg,#3b82f6,#06b6d4);
     color: white;
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* BOUTONS */
+button {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
 }
 
 button:hover {
-    background: #2980b9;
+    transform: translateY(-2px);
+    background: #2563eb;
 }
 
-table {
-    margin: auto;
-    border-collapse: collapse;
-    width: 70%;
+/* FORMULAIRE */
+.form {
     background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.dark .form {
+    background: #1e293b;
+}
+
+/* INPUTS */
+input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* TABLE */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .dark table {
-    background: #1e1e1e;
-}
-
-th, td {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    background: #1e293b;
 }
 
 th {
-    background: #3498db;
+    background: #3b82f6;
     color: white;
+    padding: 12px;
+    text-transform: uppercase;
 }
 
-.supprimer {
-    background: red;
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* TOTAL */
+h2 {
+    text-align: center;
+    font-size: 28px;
+}
+
+/* GRAPHIQUE */
+canvas {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80% !important;
+    margin: 30px auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.dark canvas {
+    background: #1e293b;
 }

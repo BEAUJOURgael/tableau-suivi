@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de Suivi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>📊 Tableau de Suivi</h1>
+
+<div class="form">
+    <input type="text" id="nom" placeholder="Nom de la tâche">
+    <input type="number" id="valeur" placeholder="Valeur (€)">
+    <button onclick="ajouter()">Ajouter</button>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Tâche</th>
+            <th>Valeur</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="tableau"></tbody>
+</table>
+
+<h2>Total : <span id="total">0</span> €</h2>
+
+<script src="script.js"></script>
+</body>
+</html>

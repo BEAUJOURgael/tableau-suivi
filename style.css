@@ -108,3 +108,36 @@ canvas {
 .dark canvas {
     background: #1e293b;
 }
+.topbar, .filters {
+    text-align:center;
+    margin:15px;
+}
+
+select {
+    padding:10px;
+}
+
+.categorie {
+    padding:5px 10px;
+    border-radius:6px;
+    color:white;
+    font-size:12px;
+}
+
+.Moteur { background:#ef4444; }
+.Carrosserie { background:#f59e0b; }
+.Freinage { background:#10b981; }
+.Autre { background:#6366f1; }
+
+/* Responsive mobile */
+@media (max-width:700px){
+    table, .form {
+        width:95%;
+        font-size:14px;
+    }
+    input, select {
+        width:90%;
+        margin-top:8px;
+    }
+}
+

@@ -2,31 +2,32 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Tableau de Suivi</title>
+<title>TRK DESIGN • Suivi</title>
+
 <link rel="stylesheet" href="style.css">
 
-<!-- Graphiques -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Export Excel -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 
 <body>
 
-<h1>📊 Tableau de Suivi</h1>
+<header>
+    <h1>TRK DESIGN</h1>
+    <p>Dashboard de Suivi</p>
+</header>
 
-<div class="topbar">
-    <button onclick="toggleDarkMode()">🌙 Mode sombre</button>
-    <button onclick="toutEffacer()">🗑️ Tout effacer</button>
-    <button onclick="exportExcel()">💾 Export Excel</button>
-    <button onclick="window.print()">🖨️ Imprimer</button>
-</div>
+<section class="controls">
+    <button onclick="toggleDarkMode()">Mode sombre</button>
+    <button onclick="exportExcel()">Export Excel</button>
+    <button onclick="window.print()">Imprimer</button>
+    <button class="danger" onclick="toutEffacer()">Tout effacer</button>
+</section>
 
-<div class="form">
+<section class="card form">
     <input type="text" id="nom" placeholder="Nom">
     <input type="number" id="valeur" placeholder="Valeur €">
-    
+
     <select id="categorie">
         <option value="Moteur">Moteur</option>
         <option value="Carrosserie">Carrosserie</option>
@@ -36,14 +37,14 @@
 
     <input type="date" id="date">
     <button onclick="ajouter()">Ajouter</button>
-</div>
+</section>
 
-<div class="filters">
-    🔍 <input type="text" id="recherche" placeholder="Rechercher..." oninput="afficher()">
-    
-    📅 <input type="month" id="filtreMois" onchange="afficher()">
-</div>
+<section class="filters">
+    <input type="text" id="recherche" placeholder="Rechercher..." oninput="afficher()">
+    <input type="month" id="filtreMois" onchange="afficher()">
+</section>
 
+<section class="card">
 <table>
 <thead>
 <tr>
@@ -51,15 +52,20 @@
 <th>Nom</th>
 <th>Catégorie</th>
 <th>Valeur</th>
-<th>Action</th>
+<th></th>
 </tr>
 </thead>
 <tbody id="tableau"></tbody>
 </table>
+</section>
 
+<section class="stats">
 <h2 id="stats"></h2>
+</section>
 
+<section class="card">
 <canvas id="graphique"></canvas>
+</section>
 
 <script src="script.js"></script>
 </body>
